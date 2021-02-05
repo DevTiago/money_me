@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "970776052274",
+    "project_id": "money-me-7f8b0",
+    "storage_bucket": "money-me-7f8b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970776052274:android:36c7f835e96b5e3e1b322b",
+        "android_client_info": {
+          "package_name": "tiagooliveira.money_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970776052274-8ui80619h20tpbpfreh2dc9giseak43r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABJBaknWSlc4fsGMPILFw2Dqcs7luM00U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970776052274-8ui80619h20tpbpfreh2dc9giseak43r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
