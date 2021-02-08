@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:money_me/services/auth.dart';
+import 'package:money_me/constants.dart';
+
+import '../loading.dart';
 
 class Register extends StatefulWidget {
-
   final Function toggleView;
+
   const Register({this.toggleView});
 
   @override
@@ -11,18 +14,17 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
   String error = '';
-
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -31,7 +33,10 @@ class _RegisterState extends State<Register> {
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person, color: Colors.white),
-            label: Text('Sign in', style: TextStyle(color: Colors.white),),
+            label: Text(
+              'Sign in',
+              style: TextStyle(color: Colors.white),
+            ),
             onPressed: () {
               widget.toggleView();
             },
@@ -46,6 +51,7 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Email'),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -53,7 +59,10 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                validator: (val) => val.length < 6 ? 'Password must have at least 6 characters' : null,
+                decoration: textInputDecoration.copyWith(hintText: 'Password'),
+                validator: (val) => val.length < 6
+                    ? 'Password must have at least 6 characters'
+                    : null,
                 obscureText: true,
                 onChanged: (val) {
                   setState(() => password = val);
@@ -64,16 +73,25 @@ class _RegisterState extends State<Register> {
                   color: Colors.pink[400],
                   child: Text('Sign up', style: TextStyle(color: Colors.white)),
                   onPressed: () async {
-                   if (_formKey.currentState.validate()) {
-                     dynamic result = await _auth.registerWithEmailAndPassword(email, password);
-                     if (result == null) {
-                       setState(() => error = 'Please supply valid email');
-                     }
-                   }
-                  }
-              ),
+                    if (_formKey.currentState.validate()) {
+                      setState(() {
+                        loading = true;
+                      });
+                      dynamic result = await _auth.registerWithEmailAndPassword(
+                          email, password);
+                      if (result == null) {
+                        setState(() {
+                        error = 'Please supply valid email';
+                        loading = false;
+                        });
+                      }
+                    }
+                  }),
               SizedBox(height: 12.0),
-              Text(error, style: TextStyle(color: Colors.red, fontSize: 14.0),)
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
+              )
             ],
           ),
         ),
