@@ -1,16 +1,15 @@
-# money_me
+Authentication into Firebase Project (Android)
 
-Control your money
+First step:
+- Create a project in Firebase Console and Add Firebase to your Android App;
+- You can find your ApplicationID inside your project in 'Android/app/build.gradle' in 'defaultConfig' object;
+- Download the google-services.json file;
+- Place it inside your project into 'Android/app';
 
-## Getting Started
+Second step:
+- Add this line 'classpath 'com.google.gms:google-services:4.3.0' (the version could be different, check firebase documentation)
+into 'Android/build.gradle' on dependencies object;
+- Add this line 'apply plugin: 'com.google.gms.google-services' to the bottom of the file 'Android/app/build.gradle';
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Third step:
+- Install the 'firebase_auth' and 'cloud_firestore' packages into your app.
